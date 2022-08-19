@@ -24,6 +24,20 @@ jobs:
           apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev  libgles2-mesa-dev
           conda install -c conda-forge mamba
           mamba install -c fusion-energy -c cadquery -c conda-forge paramak=0.8.3
+          mamba install -c conda-forge gxx -y
+          mamba install -c conda-forge cmake -y
+          mamba install -c conda-forge make -y
+          mamba install -c conda-forge binutils -y
+          mamba install -c conda-forge dagmc=3.2.2 -y
+          git clone --single-branch --branch develop --depth 1 https://github.com/openmc-dev/openmc.git
+          cd openmc
+          mkdir build
+          cd build
+          cmake -DOPENMC_USE_DAGMC=ON ..
+          make -j2
+          make -j2 install
+          cd ..
+          pip install .
       - name: install package
         run: |
           pip install .
@@ -32,10 +46,6 @@ jobs:
         run: |
           pip install .[tests]
           pytest tests/test_dagmc_creation.py -v
-      - name: install non pypi dependencies for neutronics
-        run: |
-          mamba uninstall moab paramak
-          mamba install -c conda-forge -y "openmc=0.13.0=dagmc*nompi*"
       - name: Run neutronics tests
         run: |
           # pip install .[tests]

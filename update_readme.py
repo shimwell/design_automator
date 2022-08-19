@@ -16,13 +16,13 @@ with open('README.md', 'w') as readme:
     readme.write(f'| vessel offset from blanket |{proposed_design["inputs"]["vessel_offset_from_blanket"]} | m |\n')
     readme.write(f'| blanket material | {proposed_design["inputs"]["blanket_material"]} | |\n')
     readme.write(f'| blanket Li6 enrichment | {proposed_design["inputs"]["blanket_li6_enrichment"]} | percent |\n')
-
+    readme.write('\n')
     readme.write('![latest image](current_design.png)\n')
 
     readme.write('# Model checks\n')
     readme.write('| Check | Requirement | Current design value | Status |\n')
     readme.write('|---|---|---|---|\n')
-    
+
     op = requirements["weight_of_vessel"][0][0].__name__
     val = requirements["weight_of_vessel"][0][1]
     readme.write(f'| Weight of vacuum vessel | {op} {val}kg | {proposed_design["outputs"]["weight_of_vessel"]} |[![test vessel weight requirement](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml)|\n')
@@ -46,8 +46,9 @@ with open('README.md', 'w') as readme:
 
     readme.write(f'| Heating of the blanket | > 1GJ | @BlanketHeating | |\n')
     # readme.write('| DPA lifetime limit of vessel | > 50 | @NeutronShieldingVessel | |\n')
-
-    readme.write('![latest image](https://github.com/shimwell/design_automator/blob/main/neutron_flux_xy.png)\n')
+    readme.write('\n')
+    readme.write('![parameters](./design_parameters.png)\n')
+    readme.write('![parameters](./neutron_flux_xy.png)\n')
 
     # readme.write('# Software stack\n')
     # readme.write('Requirements tests are run with this software stack\n')

@@ -6,6 +6,7 @@ Parameter | Value | Units |
 | vessel offset from blanket |10 | m |
 | blanket material | 10 | |
 | blanket Li6 enrichment | 10 | percent |
+
 ![latest image](current_design.png)
 # Model checks
 | Check | Requirement | Current design value | Status |
@@ -18,4 +19,6 @@ Parameter | Value | Units |
 | Tritium breeding Ratio | ge 1.1 | @TBR | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
 | Tritium breeding Ratio | lt 3 | @TBR | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
 | Heating of the blanket | > 1GJ | @BlanketHeating | |
-![latest image](https://github.com/shimwell/design_automator/blob/main/neutron_flux_xy.png)
+
+![parameters](./design_parameters.png)
+![parameters](./neutron_flux_xy.png)

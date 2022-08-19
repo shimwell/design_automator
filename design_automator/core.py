@@ -94,8 +94,22 @@ class my_custom_design:
             materials=my_materials
         )
 
-        bound_dag_univ = openmc.DAGMCUniverse(filename=dagmc_filename, auto_geom_ids=True).bounded_universe()
-        my_geometry = openmc.Geometry(root=bound_dag_univ)
+        # bound_dag_univ = openmc.DAGMCUniverse(filename=dagmc_filename, auto_geom_ids=True).bounded_universe()
+        # my_geometry = openmc.Geometry(root=bound_dag_univ)
+
+        # makes use of the dagmc geometry
+        dag_univ = openmc.DAGMCUniverse(dagmc_filename)
+
+        # creates an edge of universe boundary at a large radius
+        vac_surf = openmc.Sphere(r=10000, surface_id=9999, boundary_type="vacuum")
+
+        # specifies the region as below the universe boundary
+        region = -vac_surf
+
+        # creates a cell from the region and fills the cell with the dagmc geometry
+        containing_cell = openmc.Cell(cell_id=9999, region=region, fill=dag_univ)
+
+        my_geometry = openmc.Geometry(root=[containing_cell])
 
         my_source = openmc.Source()
         my_source.space = openmc.stats.Point((0, 0, 0))

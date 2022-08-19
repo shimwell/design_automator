@@ -14,3 +14,4 @@ except PackageNotFoundError:
 __all__ = ["__version__"]
 
 from .core import my_custom_design
+from .design_requirements import requirements

@@ -34,8 +34,7 @@ jobs:
           pytest tests/test_dagmc_creation.py -v
       - name: install non pypi dependencies for neutronics
         run: |
-          mamba uninstall moab
-          mamba uninstall paramak
+          mamba uninstall moab paramak
           mamba install -c conda-forge -y "openmc=0.13.0=dagmc*nompi*"
       - name: Run tests
         run: |

@@ -1,4 +1,4 @@
-name: test vessel weight requirement
+name: vessel weight requirement
 
 on:
   pull_request:

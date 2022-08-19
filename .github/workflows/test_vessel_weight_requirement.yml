@@ -27,7 +27,7 @@ jobs:
       - name: install package
         run: |
           pip install .
-          python -c "import "
+          python -c "import design_automator"
       - name: Run tests
         run: |
           pip install .[tests]

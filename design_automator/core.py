@@ -84,7 +84,7 @@ class my_custom_design:
         ).openmc_material
         mat_blanket.name = "mat_blanket"
         mat_blanket.temperature = None
-        
+
         mat_vessel = nmm.Material.from_library(name="P91").openmc_material
         mat_vessel.name = "mat_vessel"
 

@@ -11,7 +11,7 @@
             "weight_of_vessel": 1e12,
             "radius_of_vessel": 10e6,
             "tritium_breeding_ratio":0,
-            "heating_ of_the_blanket": 10e6,
+            "heating_of_the_blanket": 10e6
         }
     }
 ]

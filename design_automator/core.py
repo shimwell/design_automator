@@ -55,13 +55,15 @@ class my_custom_design:
         }
         return weights
 
-    def create_dagmc_model(self):
+    def create_dagmc(self):
         model = self.create_cad_model()
         model.export_dagmc_h5m()
         return "dagmc.h5m"
 
-    def tbr(self):
-        self.create_dagmc_model()
+    def tbr(self, dagmc_filename=None):
+        if not dagmc_filename:
+            dagmc_filename = self.create_dagmc()
+
         import openmc
         import neutronics_material_maker as nmm
 
@@ -79,7 +81,7 @@ class my_custom_design:
 
         my_materials = openmc.Materials([mat_blanket, mat_vessel])
 
-        bound_dag_univ = openmc.DAGMCUniverse(filename="dagmc.h5m", auto_geom_ids=True).bounded_universe()
+        bound_dag_univ = openmc.DAGMCUniverse(filename=dagmc_filename, auto_geom_ids=True).bounded_universe()
         my_geometry = openmc.Geometry(root=bound_dag_univ)
 
         my_source = openmc.Source()

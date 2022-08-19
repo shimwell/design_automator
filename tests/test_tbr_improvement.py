@@ -9,7 +9,7 @@ def test_tbr_improvement_against_previous():
         proposed_inputs = json.load(f)
 
     test_design = my_custom_design(**proposed_inputs)
-    proposed = test_design.tbr()
+    proposed = test_design.tbr(dagmc_filename="dagmc")
 
     with open('design_successfull.json') as f:
         successfull_designs = json.load(f)

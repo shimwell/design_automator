@@ -7,7 +7,7 @@ with open("design_proposed.json") as f:
 
 example_design = my_custom_design(**proposed_inputs)
 
-tbr = example_design.tbr()
+tbr = example_design.tbr(dagmc_filename="dagmc.h5m")
 
 with open("design_successfull_temp.json") as f:
     cad_results = json.load(f)

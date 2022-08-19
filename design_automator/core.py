@@ -66,14 +66,13 @@ class my_custom_design:
         model.export_dagmc_h5m()
         return "dagmc.h5m"
 
-    def tbr(self, dagmc_filename=None):
+    def create_neutronics_model(self, dagmc_filename=None):
         if not dagmc_filename:
             dagmc_filename = self.create_dagmc()
 
         import openmc
         import neutronics_material_maker as nmm
         import openmc_data_downloader as odd
-
 
         mat_blanket = nmm.Material.from_library(
             name=self.blanket_material,
@@ -107,6 +106,20 @@ class my_custom_design:
             run_mode="fixed source", batches=10, particles=1000, source=my_source
         )
 
+        my_model = openmc.Model(
+            materials=my_materials,
+            geometry=my_geometry,
+            settings=my_settings,
+        )
+
+        return my_model
+
+    def tbr(self, dagmc_filename=None):
+        import openmc
+        my_model = self.create_neutronics_model(dagmc_filename=dagmc_filename)
+
+        mat_blanket = my_model.materials[0]  # assumes blanket is first material
+
         my_tallies = openmc.Tallies()
         mat_filter = openmc.MaterialFilter(mat_blanket)
         tbr_tally = openmc.Tally(name="TBR")
@@ -116,12 +129,7 @@ class my_custom_design:
         ]  # Where X is a wildcard character, this catches any tritium production
         my_tallies.append(tbr_tally)
 
-        my_model = openmc.Model(
-            materials=my_materials,
-            geometry=my_geometry,
-            settings=my_settings,
-            tallies=my_tallies,
-        )
+        my_model.tallies=my_tallies
         import os
         os.system('rm summary.h5')
         os.system('rm statepoint.*.h5')

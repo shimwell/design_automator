@@ -8,15 +8,14 @@ on:
     branches:
     - main
 
-
 jobs:
-  testing:
+  build:
     runs-on: ubuntu-latest
     container:
       image: continuumio/miniconda3:4.12.0
     steps:
       - name: Checkout repository
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo

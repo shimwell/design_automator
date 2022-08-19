@@ -1,4 +1,4 @@
-from design_automator import my_custom_design
+from design_automator import my_custom_design, requirements
 import json
 
 
@@ -8,11 +8,9 @@ def test_tbr_against_requirement():
     with open('design_proposed.json') as f:
         proposed_inputs = json.load(f)
     test_design = my_custom_design(**proposed_inputs)
-    proposed = test_design.tbr()
+    proposed = test_design.tbr(dagmc_filename="dagmc.h5m")
 
-    with open('design_requirements.json') as f:
-        design_requirements = json.load(f)
-
-    requirement = design_requirements["tritium_breeding_ratio"]
-
-    assert proposed > requirement
+    for requirement in requirements["tritium_breeding_ratio"]:
+        operator = requirement[0]
+        truth_val = requirement[1]
+        assert operator(proposed, truth_val)

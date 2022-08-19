@@ -1,0 +1,62 @@
+name: update design point
+
+on:  
+  pull_request:    
+    branches:
+    - main  
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: continuumio/miniconda3:4.12.0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - name: install non pypi dependencies for cad creation
+        run: |
+          apt-get --allow-releaseinfo-change update
+          apt-get update -y
+          apt-get upgrade -y
+          apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev
+          apt-get install -y imagemagick
+          conda install -c conda-forge mamba
+          mamba install -c fusion-energy -c cadquery -c conda-forge paramak=0.8.3
+      - name: install package
+        run: |
+          pip install .
+      - name: Generate new CAD values
+        run: |
+          python example_simulation_cad.py
+          convert current_design.svg current_design.png
+      - name: install non pypi dependencies for neutronics
+        run: |
+          mamba uninstall moab paramak
+          mamba install -c conda-forge -y "openmc=0.13.0=dagmc*nompi*"
+      - name: Generate new neutronics values
+        run: |
+          python example_simulation_neutronics.py
+      - name: update_readme_from_template
+        run: |
+            python update_readme.py
+      - name: Commit files
+        run: |
+          git status
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add current_design.png
+          # todo neutron flux map
+          git add design_successfull.json
+          git add README.md
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

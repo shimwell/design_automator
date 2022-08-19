@@ -13,6 +13,8 @@ class my_custom_design:
         self.vessel_offset_from_blanket = vessel_offset_from_blanket
         self.blanket_material = blanket_material
         self.blanket_li6_enrichment = blanket_li6_enrichment
+        self.vessel_thickness = 10
+        self.blanket_vessel_gap = 50
 
     def create_cad_model(self):
         import paramak
@@ -24,21 +26,25 @@ class my_custom_design:
             inner_radius=self.blanket_offset_from_source,
             outer_radius=self.blanket_offset_from_source + self.blanket_thickness,
         )
-        gap = 50
-        vessel_thickness = 10
         vessel = paramak.CenterColumnShieldCylinder(
             name="mat_vessel",
             rotation_angle=360,
             height=500,
-            inner_radius=self.blanket_offset_from_source + self.blanket_thickness + gap,
+            inner_radius=self.blanket_offset_from_source + self.blanket_thickness + self.blanket_vessel_gap,
             outer_radius=self.blanket_offset_from_source
             + self.blanket_thickness
-            + gap
-            + vessel_thickness,
+            + self.blanket_vessel_gap
+            + self.vessel_thickness,
         )
         model = paramak.Reactor([blanket, vessel])
         self.cad_model = model
         return model
+
+    def radius(self):
+        radius={}
+        radius['blanket'] = self.blanket_offset_from_source + self.blanket_thickness
+        radius['vessel'] = radius['blanket'] + self.blanket_vessel_gap + self.vessel_thickness
+        return radius
 
     def weight(self):
         self.create_cad_model()
@@ -55,15 +61,18 @@ class my_custom_design:
         }
         return weights
 
-    def create_dagmc_model(self):
+    def create_dagmc(self):
         model = self.create_cad_model()
         model.export_dagmc_h5m()
         return "dagmc.h5m"
 
-    def tbr(self):
-        self.create_dagmc_model()
+    def create_neutronics_model(self, dagmc_filename=None):
+        if not dagmc_filename:
+            dagmc_filename = self.create_dagmc()
+
         import openmc
         import neutronics_material_maker as nmm
+        import openmc_data_downloader as odd
 
         mat_blanket = nmm.Material.from_library(
             name=self.blanket_material,
@@ -74,12 +83,18 @@ class my_custom_design:
         ).openmc_material
         mat_blanket.name = "mat_blanket"
         mat_blanket.temperature = None
+
         mat_vessel = nmm.Material.from_library(name="P91").openmc_material
         mat_vessel.name = "mat_vessel"
 
         my_materials = openmc.Materials([mat_blanket, mat_vessel])
 
-        bound_dag_univ = openmc.DAGMCUniverse(filename="dagmc.h5m", auto_geom_ids=True).bounded_universe()
+        odd.just_in_time_library_generator(
+            libraries=['TENDL-2019'],
+            materials=my_materials
+        )
+
+        bound_dag_univ = openmc.DAGMCUniverse(filename=dagmc_filename, auto_geom_ids=True).bounded_universe()
         my_geometry = openmc.Geometry(root=bound_dag_univ)
 
         my_source = openmc.Source()
@@ -91,6 +106,20 @@ class my_custom_design:
             run_mode="fixed source", batches=10, particles=1000, source=my_source
         )
 
+        my_model = openmc.Model(
+            materials=my_materials,
+            geometry=my_geometry,
+            settings=my_settings,
+        )
+
+        return my_model
+
+    def tbr(self, dagmc_filename=None):
+        import openmc
+        my_model = self.create_neutronics_model(dagmc_filename=dagmc_filename)
+
+        mat_blanket = my_model.materials[0]  # assumes blanket is first material
+
         my_tallies = openmc.Tallies()
         mat_filter = openmc.MaterialFilter(mat_blanket)
         tbr_tally = openmc.Tally(name="TBR")
@@ -100,12 +129,7 @@ class my_custom_design:
         ]  # Where X is a wildcard character, this catches any tritium production
         my_tallies.append(tbr_tally)
 
-        my_model = openmc.Model(
-            materials=my_materials,
-            geometry=my_geometry,
-            settings=my_settings,
-            tallies=my_tallies,
-        )
+        my_model.tallies=my_tallies
         import os
         os.system('rm summary.h5')
         os.system('rm statepoint.*.h5')

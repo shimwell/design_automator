@@ -1,5 +1,5 @@
 import json
-
+from design_automator import requirements
 
 
 # includes TBR, heating, radius, weight etc
@@ -22,15 +22,29 @@ with open('README.md', 'w') as readme:
     readme.write('# Model checks\n')
     readme.write('| Check | Requirement | Current design value | Status |\n')
     readme.write('|---|---|---|---|\n')
-    readme.write(f'| Weight of vacuum vessel | < 1000kg | {proposed_design["outputs"]["weight_of_vessel"]} |[![test vessel weight requirement](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml)|\n')
-    readme.write(f'| Radius of vessel | < 10m | {proposed_design["outputs"]["radius_of_vessel"]} | [![radius requirement](https://github.com/shimwell/design_automator/actions/workflows/radius_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/radius_requirements.yml)\n')
+    
+    op = requirements["weight_of_vessel"][0][0].__name__
+    val = requirements["weight_of_vessel"][0][1]
+    readme.write(f'| Weight of vacuum vessel | {op} {val}kg | {proposed_design["outputs"]["weight_of_vessel"]} |[![test vessel weight requirement](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml)|\n')
+
+    op = requirements["radius_of_vessel"][0][0].__name__
+    val = requirements["radius_of_vessel"][0][1]
+    readme.write(f'| Radius of vessel | {op} {val}m | {proposed_design["outputs"]["radius_of_vessel"]} | [![radius requirement](https://github.com/shimwell/design_automator/actions/workflows/radius_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/radius_requirements.yml)\n')
     # readme.write('| Estimated cost | < £100 | @cost |\n')
 
     readme.write('# Neutronics checks\n')
     readme.write('| Check | Requirement | Current design value | Status |\n')
     readme.write('|---|---|---|---|\n')
-    readme.write('| Tritium breeding Ratio | > 1.1 | @TBR | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |\n')
-    readme.write('| Heating of the blanket | > 1GJ | @BlanketHeating | |\n')
+
+    op = requirements["tritium_breeding_ratio"][0][0].__name__
+    val = requirements["tritium_breeding_ratio"][0][1]
+    readme.write(f'| Tritium breeding Ratio | {op} {val} | @TBR | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |\n')
+    
+    op = requirements["tritium_breeding_ratio"][1][0].__name__
+    val = requirements["tritium_breeding_ratio"][1][1]
+    readme.write(f'| Tritium breeding Ratio | {op} {val} | @TBR | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |\n')
+
+    readme.write(f'| Heating of the blanket | > 1GJ | @BlanketHeating | |\n')
     # readme.write('| DPA lifetime limit of vessel | > 50 | @NeutronShieldingVessel | |\n')
 
     readme.write('![latest image](https://github.com/shimwell/design_automator/blob/main/neutron_flux_xy.png)\n')

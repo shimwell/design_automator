@@ -36,7 +36,7 @@ jobs:
         run: |
           mamba uninstall moab paramak
           mamba install -c conda-forge -y "openmc=0.13.0=dagmc*nompi*"
-      - name: Run tests
+      - name: Run neutronics tests
         run: |
-          pip install .[tests]
+          # pip install .[tests]
           pytest tests/test_tbr_improvement.py -v

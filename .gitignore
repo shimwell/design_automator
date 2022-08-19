@@ -134,3 +134,4 @@ dmypy.json
 *.out
 design_automator/_version.py
 design_successfull_temp.json
+*.svg

@@ -21,17 +21,17 @@ jobs:
           apt-get --allow-releaseinfo-change update
           apt-get update -y
           apt-get upgrade -y
-          apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev  libgles2-mesa-dev
+          apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev
+          apt-get install -y imagemagick
           conda install -c conda-forge mamba
           mamba install -c fusion-energy -c cadquery -c conda-forge paramak=0.8.3
       - name: install package
         run: |
           pip install .
-          python -c "import design_automator"
       - name: Generate new CAD values
         run: |
-          pip install .
           python example_simulation_cad.py
+          convert reactor.svg current_design.png
       - name: install non pypi dependencies for neutronics
         run: |
           mamba uninstall moab paramak

@@ -1,0 +1,34 @@
+name: test vessel weight improvement
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container:
+      image: continuumio/miniconda3:4.12.0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: install non pypi dependencies for cad creation
+        run: |
+          apt-get --allow-releaseinfo-change update
+          apt-get update -y
+          apt-get upgrade -y
+          apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev  libgles2-mesa-dev
+          conda install -c conda-forge mamba
+          mamba install -c fusion-energy -c cadquery -c conda-forge paramak=0.8.3
+      - name: install package
+        run: |
+          pip install .
+          python -c "import "
+      - name: Run tests
+        run: |
+          pip install .[tests]
+          pytest tests/test_weight_improvement.py -v

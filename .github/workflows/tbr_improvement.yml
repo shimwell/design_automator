@@ -18,9 +18,9 @@ jobs:
 
       - name: install non pypi dependencies for cad creation
         run: |
-          # apt-get --allow-releaseinfo-change update
-          # apt-get update -y
-          # apt-get upgrade -y
+          apt-get --allow-releaseinfo-change update
+          apt-get update -y
+          apt-get upgrade -y
           apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev  libgles2-mesa-dev
           conda install -c conda-forge mamba
           mamba install -c fusion-energy -c cadquery -c conda-forge paramak=0.8.3

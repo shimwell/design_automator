@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+*.h5m
+*.xml
+*.h5
+*.out
+design_automator/_version.py

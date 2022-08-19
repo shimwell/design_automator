@@ -1,0 +1,7 @@
+{
+    "blanket_offset_from_source": 10,
+    "blanket_thickness": 100,
+    "vessel_offset_from_blanket": 10,
+    "blanket_material": "Lithium",
+    "blanket_li6_enrichment": 10  
+}

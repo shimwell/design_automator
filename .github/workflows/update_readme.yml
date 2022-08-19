@@ -31,7 +31,7 @@ jobs:
       - name: Generate new CAD values
         run: |
           python example_simulation_cad.py
-          convert reactor.svg current_design.png
+          convert current_design.svg current_design.png
       - name: install non pypi dependencies for neutronics
         run: |
           mamba uninstall moab paramak

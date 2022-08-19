@@ -23,8 +23,7 @@ jobs:
           # apt-get upgrade -y
           apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev  libgles2-mesa-dev
           conda install -c conda-forge mamba
-          mamba install -c conda-forge moab
-          mamba install -c cadquery -c conda-forge cadquery=master
+          mamba install -c fusion-energy -c cadquery -c conda-forge paramak=0.8.3
       - name: install package
         run: |
           pip install .
@@ -38,7 +37,7 @@ jobs:
           mamba uninstall moab
           mamba uninstall cadquery
           mamba install -c conda-forge -y "openmc=0.13.0=dagmc*nompi*"
-      - name: Run TBR simulation tests
+      - name: Run tests
         run: |
           pip install .[tests]
           pytest tests/test_tbr_requirement.py -v

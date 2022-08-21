@@ -22,11 +22,11 @@ jobs:
           apt-get update -y
           apt-get upgrade -y
           apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev  libgles2-mesa-dev
-          conda install mamba -y
-          mamba install gxx -y
-          mamba install cmake -y
-          mamba install make -y
-          mamba install binutils -y
+          conda install -c conda-forge mamba -y
+          mamba install -c conda-forge gxx -y
+          mamba install -c conda-forge cmake -y
+          mamba install -c conda-forge make -y
+          mamba install -c conda-forge binutils -y
           mamba install -c conda-forge dagmc=3.2.2 -y
           git clone --single-branch --branch develop --depth 1 https://github.com/openmc-dev/openmc.git
           cd openmc

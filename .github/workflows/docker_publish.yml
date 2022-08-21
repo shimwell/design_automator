@@ -33,6 +33,5 @@ jobs:
       - name: Build and push dependencies Docker image
         uses: docker/build-push-action@v2
         with:
-          file: .devcontainer/Dockerfile
           push: true
           tags: ghcr.io/shimwell/design_automator:dependencies

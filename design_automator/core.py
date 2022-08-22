@@ -14,7 +14,7 @@ class my_custom_design:
         self.blanket_material = blanket_material
         self.blanket_li6_enrichment = blanket_li6_enrichment
         self.vessel_thickness = 10
-        self.blanket_vessel_gap = 50
+        self.blanket_vessel_gap = 5
 
     def create_cad_model(self):
         import paramak

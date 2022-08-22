@@ -2,10 +2,10 @@ import operator as op
 
 requirements = {
     "weight_of_vessel": [
-        (op.lt, 3e6)
+        (op.lt, 3e7)
     ],
     "radius_of_vessel": [
-        (op.lt, 100)
+        (op.lt, 200)
     ],
     "tritium_breeding_ratio": [
         (op.ge, 1.1),

@@ -11,7 +11,7 @@ requirements = {
         (op.ge, 1.1),
         (op.lt, 3)
     ],
-    "heating_of_the_blanket": [
-        (op.ge, 10e6)
-    ]
+    # "heating_of_the_blanket": [
+    #     (op.ge, 10e6)
+    # ]
 }

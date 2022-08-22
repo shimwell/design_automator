@@ -31,4 +31,4 @@ jobs:
       - name: Run tests
         run: |
           pip install .[tests]
-          pytest tests/test_weight_requirement.py -v
+          pytest tests/test_requirement_weight.py -v

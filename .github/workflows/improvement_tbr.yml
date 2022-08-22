@@ -48,4 +48,4 @@ jobs:
           pytest tests/test_dagmc_creation.py -v
       - name: Run neutronics tests
         run: |
-          pytest tests/test_tbr_improvement.py -v
+          pytest tests/test_improvement_tbr.py -v

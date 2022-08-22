@@ -58,7 +58,8 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add current_design.png
-          # todo neutron flux map
+          git add current_design.stp
+          git add neutron_heating_xy.png 
           git add design_successful.json
           git add README.md
           git commit -m "Add changes" -a

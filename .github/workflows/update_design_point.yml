@@ -44,14 +44,11 @@ jobs:
       - name: install package
         run: |
           pip install .
-      - name: Generate new CAD values
+      - name: Generate new CAD values and neutronics values
         run: |
-          python example_simulation_cad.py
-          apt-get isntall -y imagemagick
+          python example_simulation.py
+          apt-get install -y imagemagick
           convert current_design.svg current_design.png
-      - name: Generate new neutronics values
-        run: |
-          python example_simulation_neutronics.py
       - name: update_readme_from_template
         run: |
             python update_readme.py
@@ -62,7 +59,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add current_design.png
           # todo neutron flux map
-          git add design_successfull.json
+          git add design_successful.json
           git add README.md
           git commit -m "Add changes" -a
       - name: Push changes

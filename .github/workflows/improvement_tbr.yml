@@ -1,4 +1,4 @@
-name: TBR requirements
+name: TBR improvements
 
 on:
   pull_request:
@@ -48,4 +48,4 @@ jobs:
           pytest tests/test_dagmc_creation.py -v
       - name: Run neutronics tests
         run: |
-          pytest tests/test_tbr_requirement.py -v
+          pytest tests/test_improvement_tbr.py -v

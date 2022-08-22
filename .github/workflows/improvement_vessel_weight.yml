@@ -1,4 +1,4 @@
-name: radius requirement
+name: vessel weight improvement
 
 on:
   pull_request:
@@ -31,4 +31,4 @@ jobs:
       - name: Run tests
         run: |
           pip install .[tests]
-          pytest tests/test_radius_requirement.py -v
+          pytest tests/test_improvement_weight.py -v

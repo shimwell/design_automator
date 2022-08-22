@@ -1,18 +1,24 @@
-name: update design point
+name: add files to release
 
-on:  
-  pull_request:    
-    branches:
-    - main  
-  push:
-    branches:
-    - main
+on:
+  # allows us to run workflows manually
+  workflow_dispatch:
+
+  release:
+    types: # This configuration does not affect the page_build event above
+      - published
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  build:
+  building-plugin:
     runs-on: ubuntu-latest
+
+    name: 'create_files'
+
     container:
       image: continuumio/miniconda3:4.12.0
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -44,26 +50,26 @@ jobs:
       - name: install package
         run: |
           pip install .
-      - name: Generate new CAD values and neutronics values
+
+      - name: create files
         run: |
-          python example_simulation.py
-          apt-get install -y imagemagick
-          convert current_design.svg current_design.png
-      - name: update_readme_from_template
-        run: |
-            python update_readme.py
-      - name: Commit files
-        run: |
-          git status
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add current_design.png
-          # todo neutron flux map
-          git add design_successful.json
-          git add README.md
-          git commit -m "Add changes" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+          python example_simulation_cad.py
+          python update_readme.py
+          apt-get -y update
+          apt-get -y install zip
+          zip attached_files.zip *.stp *.png *.json *.xml *.h5m *.md
+
+      - name: Upload artifact for CI
+        uses: actions/upload-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          name: attached_files.zip
+          path: attached_files.zip
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn` 
+
+      - name: Upload files into the release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: attached_files.zip
+          asset_name: attached_files.zip
+          tag: ${{ github.ref }}

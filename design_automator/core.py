@@ -157,5 +157,46 @@ class my_custom_design:
 
         return tbr_tally_result
 
-    def heating(self):
-        self.create_dagmc_model()
+    def heating(self, dagmc_filename=None):
+        import openmc
+        my_model = self.create_neutronics_model(dagmc_filename=dagmc_filename)
+
+        # Create mesh which will be used for tally
+        mesh = openmc.RegularMesh()
+        mesh_height = 100   # number of cells in the X and Z dimensions
+        mesh_width = mesh_height
+        mesh.dimension = [mesh_width, mesh_height, 1] # only 1 cell in the Y dimension
+        mesh.lower_left = [-100, -100, -100]   # physical limits (corners) of the mesh
+        mesh.upper_right = [100, 100, 100]
+
+        my_tallies = openmc.Tallies()
+        mesh_filter = openmc.MeshFilter(mesh)
+        heating_mesh_tally = openmc.Tally(name="heating_mesh")
+        heating_mesh_tally.filters = [mesh_filter]
+        heating_mesh_tally.scores = ["heating"]
+        my_tallies.append(heating_mesh_tally)
+
+        my_model.tallies=my_tallies
+        import os
+        os.system('rm summary.h5')
+        os.system('rm statepoint.*.h5')
+        statepoint_file = my_model.run()
+
+        sp = openmc.StatePoint(statepoint_file)
+
+        # access the flux tally
+        my_tally = sp.get_tally(name="heating_mesh")
+        my_slice = my_tally.get_slice(scores=["heating"])
+        my_slice.mean.shape = (mesh_width, mesh_height)
+
+        import matplotlib.pyplot as plt
+        fig = plt.subplot()
+
+        # when plotting the 2d data, added the extent is required.
+        # otherwise the plot uses the index of the 2d data arrays
+        # as the x y axis
+        fig.imshow(my_slice.mean, extent=[-100,100,-100,100])
+        plt.title('neutron heating on xy slice of geometry')
+        plt.xlabel('Distance on x axis [cm]')
+        plt.ylabel('Distance on y axis [cm]')
+        plt.savefig('neutron_heating_xy.png')

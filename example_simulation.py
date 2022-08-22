@@ -8,6 +8,8 @@ with open("design_proposed.json") as f:
 example_design = my_custom_design(**proposed_inputs)
 
 tbr = example_design.tbr()
+heating = example_design.heating()
+
 radius = example_design.radius()["vessel"]
 vessel_weight = example_design.weight()["vessel"]
 

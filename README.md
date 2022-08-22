@@ -18,7 +18,6 @@ Parameter | Value | Units |
 |---|---|---|---|
 | Tritium breeding Ratio | ge 1.1 | 0 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
 | Tritium breeding Ratio | lt 3 | 0 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
-| Heating of the blanket | > 1GJ | @BlanketHeating | |
 
 ![parameters](./design_parameters.png)
-![parameters](./neutron_flux_xy.png)
+![parameters](./neutron_heating_xy.png)

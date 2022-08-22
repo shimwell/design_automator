@@ -48,7 +48,7 @@ with open('README.md', 'w') as readme:
     # readme.write('| DPA lifetime limit of vessel | > 50 | @NeutronShieldingVessel | |\n')
     readme.write('\n')
     readme.write('![parameters](./design_parameters.png)\n')
-    readme.write('![parameters](./neutron_flux_xy.png)\n')
+    readme.write('![parameters](./neutron_heating_xy.png)\n')
 
     # readme.write('# Software stack\n')
     # readme.write('Requirements tests are run with this software stack\n')

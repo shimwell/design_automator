@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: install non pypi dependencies for cad creation
+      - name: install non pypi dependencies
         run: |
           apt-get --allow-releaseinfo-change update
           apt-get update -y

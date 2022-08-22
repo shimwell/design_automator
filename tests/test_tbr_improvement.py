@@ -11,9 +11,9 @@ def test_tbr_improvement_against_previous():
     test_design = my_custom_design(**proposed_inputs)
     proposed = test_design.tbr(dagmc_filename="dagmc.h5m")
 
-    with open('design_successfull.json') as f:
-        successfull_designs = json.load(f)
+    with open('design_successful.json') as f:
+        successful_designs = json.load(f)
 
-    previous = successfull_designs[-1]["outputs"]["tritium_breeding_ratio"]
+    previous = successful_designs[-1]["outputs"]["tritium_breeding_ratio"]
 
     assert proposed > previous

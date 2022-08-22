@@ -11,8 +11,8 @@ def test_vessel_radius_improvement_against_previous():
     test_design = my_custom_design(**proposed_inputs)
     proposed = test_design.radius()['vessel']
 
-    with open('design_successfull.json') as f:
-        successfull_designs = json.load(f)
-    previous = successfull_designs[-1]["outputs"]["radius_of_vessel"]
+    with open('design_successful.json') as f:
+        successful_designs = json.load(f)
+    previous = successful_designs[-1]["outputs"]["radius_of_vessel"]
 
     assert proposed < previous

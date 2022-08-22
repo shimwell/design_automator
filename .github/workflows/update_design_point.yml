@@ -19,29 +19,36 @@ jobs:
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-      - name: install non pypi dependencies for cad creation
+      - name: install non pypi dependencies
         run: |
           apt-get --allow-releaseinfo-change update
           apt-get update -y
           apt-get upgrade -y
-          apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev
-          apt-get install -y imagemagick
-          conda install -c conda-forge mamba
+          apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev  libgles2-mesa-dev
+          conda install -c conda-forge mamba -y
+          mamba install -c conda-forge gxx -y
+          mamba install -c conda-forge cmake -y
+          mamba install -c conda-forge make -y
+          mamba install -c conda-forge binutils -y
+          mamba install -c conda-forge dagmc=3.2.2 -y
+          git clone --single-branch --branch develop --depth 1 https://github.com/openmc-dev/openmc.git
+          cd openmc
+          mkdir build
+          cd build
+          cmake -DOPENMC_USE_DAGMC=ON ..
+          make -j
+          make -j install
+          cd ..
+          pip install .
           mamba install -c fusion-energy -c cadquery -c conda-forge paramak=0.8.3
       - name: install package
         run: |
           pip install .
-      - name: Generate new CAD values
+      - name: Generate new CAD values and neutronics values
         run: |
-          python example_simulation_cad.py
+          python example_simulation.py
+          apt-get install -y imagemagick
           convert current_design.svg current_design.png
-      - name: install non pypi dependencies for neutronics
-        run: |
-          mamba uninstall moab paramak
-          mamba install -c conda-forge -y "openmc=0.13.0=dagmc*nompi*"
-      - name: Generate new neutronics values
-        run: |
-          python example_simulation_neutronics.py
       - name: update_readme_from_template
         run: |
             python update_readme.py
@@ -52,7 +59,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add current_design.png
           # todo neutron flux map
-          git add design_successfull.json
+          git add design_successful.json
           git add README.md
           git commit -m "Add changes" -a
       - name: Push changes

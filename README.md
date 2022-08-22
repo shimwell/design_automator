@@ -11,14 +11,13 @@ Parameter | Value | Units |
 # Model checks
 | Check | Requirement | Current design value | Status |
 |---|---|---|---|
-| Weight of vacuum vessel | lt 1000000.0kg | 1000000000000.0 |[![test vessel weight requirement](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml)|
-| Radius of vessel | lt 100m | 10000000.0 | [![radius requirement](https://github.com/shimwell/design_automator/actions/workflows/radius_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/radius_requirements.yml)
+| Weight of vacuum vessel | lt 30000000.0kg | 1000000000000.0 |[![test vessel weight requirement](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/test_vessel_weight_requirement.yml)|
+| Radius of vessel | lt 200m | 10000000.0 | [![radius requirement](https://github.com/shimwell/design_automator/actions/workflows/radius_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/radius_requirements.yml)
 # Neutronics checks
 | Check | Requirement | Current design value | Status |
 |---|---|---|---|
-| Tritium breeding Ratio | ge 1.1 | @TBR | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
-| Tritium breeding Ratio | lt 3 | @TBR | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
-| Heating of the blanket | > 1GJ | @BlanketHeating | |
+| Tritium breeding Ratio | ge 1.1 | 0 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
+| Tritium breeding Ratio | lt 3 | 0 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
 
 ![parameters](./design_parameters.png)
-![parameters](./neutron_flux_xy.png)
+![parameters](./neutron_heating_xy.png)

@@ -6,7 +6,17 @@ FROM continuumio/miniconda3:4.12.0
 
 RUN apt-get --allow-releaseinfo-change update
 RUN apt-get --yes update && apt-get --yes upgrade
-RUN apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev imagemagick
+RUN apt-get install -y libgl1-mesa-glx \
+                       libgl1-mesa-dev \
+                       libglu1-mesa-dev \
+                       freeglut3-dev \
+                       libosmesa6 \
+                       libosmesa6-dev \
+                       libgles2-mesa-dev \
+                       imagemagick \
+                       libhdf5-serial-dev \
+                       libhdf5-mpich-dev \
+                       hdf5-tools
 
 RUN conda config --add channels conda-forge
 RUN conda config --set channel_priority strict

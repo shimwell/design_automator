@@ -8,6 +8,13 @@ with open('design_successful.json') as f:
 
 
 with open('README.md', 'w') as readme:
+    readme.write('# Design Parameters\n')
+    readme.write('## blanket material')
+    readme.write('## blanket Li6 enrichment')
+    readme.write('![parameters](./design_parameters.png)\n')
+
+    readme.write('\n')
+
     readme.write('# Current design\n')
     readme.write('Parameter | Value | Units |\n')
     readme.write('|---|---|---|\n')
@@ -47,7 +54,7 @@ with open('README.md', 'w') as readme:
     # readme.write(f'| Heating of the blanket | > 1GJ | @BlanketHeating | |\n')
     # readme.write('| DPA lifetime limit of vessel | > 50 | @NeutronShieldingVessel | |\n')
     readme.write('\n')
-    readme.write('![parameters](./design_parameters.png)\n')
+
     readme.write('![parameters](./neutron_heating_xy.png)\n')
 
     # readme.write('# Software stack\n')

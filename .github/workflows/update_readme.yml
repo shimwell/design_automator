@@ -1,4 +1,4 @@
-name: update design point
+name: update readme
 
 on:  
   pull_request:    
@@ -34,8 +34,8 @@ jobs:
       - name: Commit files
         run: |
           git status
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add current_design.png
           git add current_design.stp
           git add neutron_heating_xy.png 
@@ -43,7 +43,7 @@ jobs:
           git add README.md
           git commit -m "Add changes" -a
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}

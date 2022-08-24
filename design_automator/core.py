@@ -41,9 +41,9 @@ class my_custom_design:
         return model
 
     def radius(self):
-        radius={}
-        radius['blanket'] = self.blanket_offset_from_source + self.blanket_thickness
-        radius['vessel'] = radius['blanket'] + self.blanket_vessel_gap + self.vessel_thickness
+        radius = {}
+        radius["blanket"] = self.blanket_offset_from_source + self.blanket_thickness
+        radius["vessel"] = radius["blanket"] + self.blanket_vessel_gap + self.vessel_thickness
         return radius
 
     def weight(self):
@@ -89,10 +89,7 @@ class my_custom_design:
 
         my_materials = openmc.Materials([mat_blanket, mat_vessel])
 
-        odd.just_in_time_library_generator(
-            libraries=['TENDL-2019'],
-            materials=my_materials
-        )
+        odd.just_in_time_library_generator(libraries=["TENDL-2019"], materials=my_materials)
 
         # bound_dag_univ = openmc.DAGMCUniverse(filename=dagmc_filename, auto_geom_ids=True).bounded_universe()
         # my_geometry = openmc.Geometry(root=bound_dag_univ)
@@ -116,9 +113,7 @@ class my_custom_design:
         my_source.angle = openmc.stats.Isotropic()
         my_source.energy = openmc.stats.Discrete([14e6], [1])
 
-        my_settings = openmc.Settings(
-            run_mode="fixed source", batches=10, particles=1000, source=my_source
-        )
+        my_settings = openmc.Settings(run_mode="fixed source", batches=10, particles=1000, source=my_source)
 
         my_model = openmc.Model(
             materials=my_materials,
@@ -130,6 +125,7 @@ class my_custom_design:
 
     def tbr(self, dagmc_filename=None):
         import openmc
+
         my_model = self.create_neutronics_model(dagmc_filename=dagmc_filename)
 
         mat_blanket = my_model.materials[0]  # assumes blanket is first material
@@ -138,15 +134,14 @@ class my_custom_design:
         mat_filter = openmc.MaterialFilter(mat_blanket)
         tbr_tally = openmc.Tally(name="TBR")
         tbr_tally.filters = [mat_filter]
-        tbr_tally.scores = [
-            "(n,Xt)"
-        ]  # Where X is a wildcard character, this catches any tritium production
+        tbr_tally.scores = ["(n,Xt)"]  # Where X is a wildcard character, this catches any tritium production
         my_tallies.append(tbr_tally)
 
-        my_model.tallies=my_tallies
+        my_model.tallies = my_tallies
         import os
-        os.system('rm summary.h5')
-        os.system('rm statepoint.*.h5')
+
+        os.system("rm summary.h5")
+        os.system("rm statepoint.*.h5")
         statepoint_file = my_model.run()
 
         sp = openmc.StatePoint(statepoint_file)
@@ -159,14 +154,15 @@ class my_custom_design:
 
     def heating(self, dagmc_filename=None):
         import openmc
+
         my_model = self.create_neutronics_model(dagmc_filename=dagmc_filename)
 
         # Create mesh which will be used for tally
         mesh = openmc.RegularMesh()
-        mesh_height = 100   # number of cells in the X and Z dimensions
+        mesh_height = 100  # number of cells in the X and Z dimensions
         mesh_width = mesh_height
-        mesh.dimension = [mesh_width, mesh_height, 1] # only 1 cell in the Y dimension
-        mesh.lower_left = [-100, -100, -100]   # physical limits (corners) of the mesh
+        mesh.dimension = [mesh_width, mesh_height, 1]  # only 1 cell in the Y dimension
+        mesh.lower_left = [-100, -100, -100]  # physical limits (corners) of the mesh
         mesh.upper_right = [100, 100, 100]
 
         my_tallies = openmc.Tallies()
@@ -176,10 +172,11 @@ class my_custom_design:
         heating_mesh_tally.scores = ["heating"]
         my_tallies.append(heating_mesh_tally)
 
-        my_model.tallies=my_tallies
+        my_model.tallies = my_tallies
         import os
-        os.system('rm summary.h5')
-        os.system('rm statepoint.*.h5')
+
+        os.system("rm summary.h5")
+        os.system("rm statepoint.*.h5")
         statepoint_file = my_model.run()
 
         sp = openmc.StatePoint(statepoint_file)
@@ -190,13 +187,14 @@ class my_custom_design:
         my_slice.mean.shape = (mesh_width, mesh_height)
 
         import matplotlib.pyplot as plt
+
         fig = plt.subplot()
 
         # when plotting the 2d data, added the extent is required.
         # otherwise the plot uses the index of the 2d data arrays
         # as the x y axis
-        fig.imshow(my_slice.mean, extent=[-100,100,-100,100])
-        plt.title('neutron heating on xy slice of geometry')
-        plt.xlabel('Distance on x axis [cm]')
-        plt.ylabel('Distance on y axis [cm]')
-        plt.savefig('neutron_heating_xy.png')
+        fig.imshow(my_slice.mean, extent=[-100, 100, -100, 100])
+        plt.title("neutron heating on xy slice of geometry")
+        plt.xlabel("Distance on x axis [cm]")
+        plt.ylabel("Distance on y axis [cm]")
+        plt.savefig("neutron_heating_xy.png")

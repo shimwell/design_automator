@@ -1,72 +1,62 @@
 [
   {
-    "inputs": {
-      "blanket_offset_from_source": 10,
-      "blanket_thickness": 10,
-      "vessel_offset_from_blanket": 10,
-      "blanket_material": 10,
-      "blanket_li6_enrichment": 10
-    },
-    "outputs": {
-      "weight_of_vessel": 1000000000000.0,
-      "radius_of_vessel": 10000000.0,
-      "tritium_breeding_ratio": 0
-    }
+    "blanket_offset_from_source": 10,
+    "blanket_thickness": 10,
+    "vessel_offset_from_blanket": 10,
+    "blanket_material": 10,
+    "blanket_li6_enrichment": 10,
+    "weight_of_vessel": 35190263.43264143,
+    "radius_of_vessel": 300.0,
+    "tritium_breeding_ratio": 0
   },
   {
-    "inputs": {
-      "blanket_offset_from_source": 30,
-      "blanket_thickness": 60,
-      "vessel_offset_from_blanket": 5,
-      "blanket_material": "Lithium",
-      "blanket_li6_enrichment": 10
-    },
-    "outputs": {
-      "weight_of_vessel": 24190263.43264143,
-      "radius_of_vessel": 105,
-      "tritium_breeding_ratio": 1.3040324752220274
-    }
+    "blanket_offset_from_source": 30,
+    "blanket_thickness": 60,
+    "vessel_offset_from_blanket": 5,
+    "blanket_material": "Lithium",
+    "blanket_li6_enrichment": 10,
+    "weight_of_vessel": 27190263.43264143,
+    "radius_of_vessel": 200,
+    "tritium_breeding_ratio": 0.5
   },
   {
-    "inputs": {
-      "blanket_offset_from_source": 30,
-      "blanket_thickness": 60,
-      "vessel_offset_from_blanket": 5,
-      "blanket_material": "Lithium",
-      "blanket_li6_enrichment": 10
-    },
-    "outputs": {
-      "weight_of_vessel": 24190263.43264143,
-      "radius_of_vessel": 105,
-      "tritium_breeding_ratio": 1.3082454692047558
-    }
+    "blanket_offset_from_source": 30,
+    "blanket_thickness": 60,
+    "vessel_offset_from_blanket": 5,
+    "blanket_material": "Lithium",
+    "blanket_li6_enrichment": 10,
+    "weight_of_vessel": 24190263.43264143,
+    "radius_of_vessel": 150,
+    "tritium_breeding_ratio": 0.8
   },
   {
-    "inputs": {
-      "blanket_offset_from_source": 30,
-      "blanket_thickness": 60,
-      "vessel_offset_from_blanket": 5,
-      "blanket_material": "Lithium",
-      "blanket_li6_enrichment": 10
-    },
-    "outputs": {
-      "weight_of_vessel": 24190263.43264143,
-      "radius_of_vessel": 105,
-      "tritium_breeding_ratio": 1.3059808923280056
-    }
+    "blanket_offset_from_source": 30,
+    "blanket_thickness": 60,
+    "vessel_offset_from_blanket": 5,
+    "blanket_material": "Lithium",
+    "blanket_li6_enrichment": 10,
+    "weight_of_vessel": 24190263.43264143,
+    "radius_of_vessel": 140,
+    "tritium_breeding_ratio": 1.2
   },
   {
-    "inputs": {
-      "blanket_offset_from_source": 30,
-      "blanket_thickness": 60,
-      "vessel_offset_from_blanket": 5,
-      "blanket_material": "Lithium",
-      "blanket_li6_enrichment": 10
-    },
-    "outputs": {
-      "weight_of_vessel": 24190263.43264143,
-      "radius_of_vessel": 105,
-      "tritium_breeding_ratio": 1.3067788254740704
-    }
+    "blanket_offset_from_source": 30,
+    "blanket_thickness": 60,
+    "vessel_offset_from_blanket": 5,
+    "blanket_material": "Lithium",
+    "blanket_li6_enrichment": 10,
+    "weight_of_vessel": 24190263.43264143,
+    "radius_of_vessel": 105,
+    "tritium_breeding_ratio": 1.1
+  },
+  {
+    "blanket_offset_from_source": 30,
+    "blanket_thickness": 60,
+    "vessel_offset_from_blanket": 5,
+    "blanket_material": "Lithium",
+    "blanket_li6_enrichment": 10,
+    "weight_of_vessel": 24190263.43264143,
+    "radius_of_vessel": 105,
+    "tritium_breeding_ratio": 1.3088026777264195
   }
 ]

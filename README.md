@@ -24,7 +24,7 @@ Parameter | Value | Units |
 # Neutronics checks
 | Check | Requirement | Current design value | Status |
 |---|---|---|---|
-| Tritium breeding Ratio | ge 1.1 | 1.3040324752220274 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
-| Tritium breeding Ratio | lt 3 | 1.3040324752220274 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
+| Tritium breeding Ratio | ge 1.1 | 1.3082454692047558 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
+| Tritium breeding Ratio | lt 3 | 1.3082454692047558 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/tbr_requirements.yml) |
 
 ![parameters](./neutron_heating_xy.png)

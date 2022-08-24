@@ -9,8 +9,11 @@ with open('design_successful.json') as f:
 
 with open('README.md', 'w') as readme:
     readme.write('# Design Parameters\n')
-    readme.write('## blanket material')
-    readme.write('## blanket Li6 enrichment')
+    readme.write('- blanket material: string\n')
+    readme.write('- blanket Li6 enrichment: float between 0. and 100.\n')
+    readme.write('- vessel offset from blanket: float above 0.\n')
+    readme.write('- blanket thickness: float above 0.\n')
+    readme.write('- blanket offset from source: float above 0.\n')
     readme.write('![parameters](./design_parameters.png)\n')
 
     readme.write('\n')

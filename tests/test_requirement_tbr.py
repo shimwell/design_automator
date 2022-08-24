@@ -5,7 +5,7 @@ import json
 def test_tbr_against_requirement():
     """Checks that the tbr passes the requirement"""
 
-    with open('design_proposed.json') as f:
+    with open("design_proposed.json") as f:
         proposed_inputs = json.load(f)
     test_design = my_custom_design(**proposed_inputs)
     proposed = test_design.tbr(dagmc_filename="dagmc.h5m")

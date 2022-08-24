@@ -28,6 +28,7 @@ jobs:
           python example_simulation.py
           apt-get install -y imagemagick
           convert current_design.svg current_design.png
+          python plot_improvements.py
       - name: update_readme_from_template
         run: |
             python update_readme.py
@@ -39,6 +40,7 @@ jobs:
           git add current_design.png
           git add current_design.stp
           git add neutron_heating_xy.png 
+          git add improvements_*.png 
           git add design_successful.json
           git add README.md
           git commit -m "Add changes" -a

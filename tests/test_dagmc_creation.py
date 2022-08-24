@@ -7,9 +7,9 @@ import os
 def test_dagmc_file_creation():
     """Checks that the dagmc file can be made"""
 
-    os.system('rm dagmc.h5m')
+    os.system("rm dagmc.h5m")
 
-    with open('design_proposed.json') as f:
+    with open("design_proposed.json") as f:
         proposed_inputs = json.load(f)
     test_design = my_custom_design(**proposed_inputs)
 

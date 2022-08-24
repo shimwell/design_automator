@@ -40,7 +40,7 @@ jobs:
           git add current_design.png
           git add current_design.stp
           git add neutron_heating_xy.png 
-          git add improvements_*.png 
+          git add improvement_*.png 
           git add design_successful.json
           git add README.md
           git commit -m "Add changes" -a

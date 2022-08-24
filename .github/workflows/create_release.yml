@@ -32,7 +32,7 @@ jobs:
 
       - name: create files
         run: |
-          python example_simulation_cad.py
+          python example_simulation.py
           python update_readme.py
           apt-get -y update
           apt-get -y install zip

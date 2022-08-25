@@ -3,5 +3,5 @@
     "blanket_thickness": 60,
     "vessel_offset_from_blanket": 5,
     "blanket_material": "Lithium",
-    "blanket_li6_enrichment": 10  
+    "blanket_li6_enrichment": 20
 }

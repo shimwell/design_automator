@@ -138,5 +138,15 @@
     "weight_of_vessel": 24190263.43264143,
     "radius_of_vessel": 105,
     "tritium_breeding_ratio": 1.3345402133510154
+  },
+  {
+    "blanket_offset_from_source": 30,
+    "blanket_thickness": 60,
+    "vessel_offset_from_blanket": 5,
+    "blanket_material": "Lithium",
+    "blanket_li6_enrichment": 15,
+    "weight_of_vessel": 24190263.43264143,
+    "radius_of_vessel": 105,
+    "tritium_breeding_ratio": 1.32566240631087
   }
 ]

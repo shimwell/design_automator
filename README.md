@@ -11,22 +11,22 @@
 Parameter | Value | Units |
 |---|---|---|
 | blanket offset from source | 30 | m |
-| blanket thickness | 70 | m |
+| blanket thickness | 85 | m |
 | vessel offset from blanket |5 | m |
 | blanket material | Lithium | |
-| blanket Li6 enrichment | 15 | percent |
+| blanket Li6 enrichment | 10 | percent |
 
 ![latest image](current_design.png)
 # Model checks
 | Check | Requirement | Current design value | Status |
 |---|---|---|---|
-| Weight of vacuum vessel | lt 30000000.0kg | 26609289.775905542 | [![vessel weight requirement](https://github.com/shimwell/design_automator/actions/workflows/requirement_vessel_weight.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/requirement_vessel_weight.yml) |
-| Radius of vessel | lt 200m | 115 | [![radius requirement](https://github.com/shimwell/design_automator/actions/workflows/requirements_radius.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/requirements_radius.yml) 
+| Weight of vacuum vessel | lt 30000000.0kg | 30237829.29080174 | [![vessel weight requirement](https://github.com/shimwell/design_automator/actions/workflows/requirement_vessel_weight.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/requirement_vessel_weight.yml) |
+| Radius of vessel | lt 200m | 130 | [![radius requirement](https://github.com/shimwell/design_automator/actions/workflows/requirements_radius.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/requirements_radius.yml) 
 # Neutronics checks
 | Check | Requirement | Current design value | Status |
 |---|---|---|---|
-| Tritium breeding Ratio | ge 1.1 | 1.436102262682803 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/requirements_tbr.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/requirements_tbr.yml) |
-| Tritium breeding Ratio | lt 3 | 1.436102262682803 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/requirements_tbr.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/requirements_tbr.yml) |
+| Tritium breeding Ratio | ge 1.1 | 1.5361276877974954 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/requirements_tbr.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/requirements_tbr.yml) |
+| Tritium breeding Ratio | lt 3 | 1.5361276877974954 | [![TBR requirements](https://github.com/shimwell/design_automator/actions/workflows/requirements_tbr.yml/badge.svg)](https://github.com/shimwell/design_automator/actions/workflows/requirements_tbr.yml) |
 
 ![parameters](./neutron_heating_xy.png)
 

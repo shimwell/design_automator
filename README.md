@@ -1,3 +1,5 @@
+[video explain](https://www.youtube.com/watch?v=UcV1SxdXLqs)
+
 # Design Parameters
 - blanket material: string
 - blanket Li6 enrichment: float gt 0. and lt 100.
